@@ -22,6 +22,7 @@ pipeline{
         stage("Run Docker File"){
             steps{
                 script{
+                    sh "docker rm -f ${CONTAINER_NAME} || true"
                     sh "docker run -d -p 3000:${Port} --name ${Container_name} ${Image_name}" 
                 }
             }
