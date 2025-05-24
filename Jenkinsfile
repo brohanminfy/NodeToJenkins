@@ -8,13 +8,13 @@ pipeline{
     stages{
         stage("Cloning Repository"){
             steps{
-                git 'https://github.com/brohanminfy/NodeToJenkins.git'
+                git branch:'main' , url : 'https://github.com/brohanminfy/NodeToJenkins.git'
             }
         }
         stage("Build Docker Image"){
             steps{
                 script{
-                dockerImage = docker.build("{$Image_name}")
+                dockerImage = docker.build("${Image_name}")
 
                 }
             }
