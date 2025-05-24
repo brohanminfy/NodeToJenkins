@@ -6,7 +6,6 @@ WORKDIR /app
 
 # Copy only package.json and lock file first for caching
 COPY package*.json ./
-
 # Install only production dependencies
 RUN npm install --production
 
