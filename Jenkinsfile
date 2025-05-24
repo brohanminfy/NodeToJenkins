@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+    environment{
+        Image_name = "rohan-node-app"
+        Container_name = "rohan-container"
+        Port = '3000'
+    }
+    stages{
+        stage("Cloning Repository"){
+            steps{
+                git 'https://github.com/brohanminfy/NodeToJenkins.git'
+            }
+        }
+        stage("Build Docker Image"){
+            steps{
+                script{
+                dockerImage = docker.build("{$Image_name}")
+
+                }
+            }
+        }
+        stage("Run Docker File"){
+            steps{
+                script{
+                    sh "docker run -d -p 3000:${Port} --name ${Container_name} ${Image_name}" 
+                }
+            }
+        }
+    }
+}
